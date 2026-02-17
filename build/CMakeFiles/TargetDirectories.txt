@@ -1,3 +1,0 @@
-/Users/gabrielgenaro/Developer/pessoal/office_ai/build/CMakeFiles/program.dir
-/Users/gabrielgenaro/Developer/pessoal/office_ai/build/CMakeFiles/edit_cache.dir
-/Users/gabrielgenaro/Developer/pessoal/office_ai/build/CMakeFiles/rebuild_cache.dir
