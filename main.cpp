@@ -7,8 +7,14 @@
 #include "progress.h"
 #include "llama.h"
 
+static void log_silencioso(ggml_log_level level, const char* text, void* user_data) {
+    // não faz nada
+}
+
 int main()
 {
+    llama_log_set(log_silencioso, nullptr);
+
     std::cout << "Iniciando programa..." << std::flush;
     std::this_thread::sleep_for(std::chrono::seconds(1));
     std::cout << "\r\033[2K" << std::flush;
@@ -55,7 +61,8 @@ int main()
 
     // Simulate a message
     // Tokenize a prompt
-    std::string prompt = "Hi, what can you do?";
+    // std::string prompt = "You are a helpful assistant. Give a detailed answer to: Hi, what can you do?";
+    std::string prompt = "Você é um assistente útil. Dê uma resposta detalhada para: Olá, o que você pode fazer?";
     std::vector<llama_token> tokens(prompt.size() * 4); // Allocate enough space for tokens
     int n_tokens = llama_tokenize(
         vocab, prompt.c_str(), prompt.size(),
@@ -67,7 +74,11 @@ int main()
 
     // Processa e gera tokens
     llama_sampler *sampler = llama_sampler_chain_init(llama_sampler_chain_default_params());
-    llama_sampler_chain_add(sampler, llama_sampler_init_greedy());
+    // llama_sampler_chain_add(sampler, llama_sampler_init_greedy());
+    llama_sampler_chain_add(sampler, llama_sampler_init_temp(0.7f));
+    llama_sampler_chain_add(sampler, llama_sampler_init_dist(LLAMA_DEFAULT_SEED));
+
+    std::cout << std::endl;
 
     for (int i = 0; i < 200; i++)
     { // gera até 200 tokens
