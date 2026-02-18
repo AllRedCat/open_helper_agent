@@ -5,9 +5,13 @@ set(CMAKE_CXX_STANDARD 17)
 
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 
+# Include the llama.cpp subproject and link its library to the executable
+add_subdirectory(llama.cpp)
+
 add_executable(program
     main.cpp
-    ${SOURCES}
+    # ${SOURCES}
 )
 
 target_include_directories(program PRIVATE include)
+target_link_libraries(program PRIVATE llama)
