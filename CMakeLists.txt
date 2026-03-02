@@ -10,7 +10,7 @@ add_subdirectory(llama.cpp)
 
 add_executable(program
     main.cpp
-    # ${SOURCES}
+    ${SOURCES}
 )
 
 target_include_directories(program PRIVATE include)
