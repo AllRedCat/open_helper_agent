@@ -62,8 +62,6 @@ int teste()
 
   // Simulate a message
   // Tokenize a prompt
-  // std::string prompt = "You are a helpful assistant. Give a detailed answer
-  // to: Hi, what can you do?";
   std::string prompt = "Você é um assistente útil. Dê uma resposta detalhada "
                        "para: Olá, o que você pode fazer?";
   std::vector<llama_token> tokens(prompt.size() *
